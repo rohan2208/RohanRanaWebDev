@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Reaction</title>
+	<style type="text/css">
+		#box{
+			height: 600px;
+			width: 1500px;
+			border: 1px solid black;
+			position: relative;
+		}
+		#element {
+			width: 150px;
+            height: 150px;
+            border: 1px solid black;
+			background-color: red;
+		    border-radius:0%; 
+		    position: relative;
+		    top: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<div id="start" ><button onclick="Game_start()">Start Game</button><button onclick="stop()">Stop Game</button></div>
+		<div>Reaction Time : <p id="time"></p></div>
+	<div id="box">
+		<div id="element" onclick="showTime()"></div>
+</div>
+</div>
+<script type="text/javascript">
+	text = document.getElementById('time');
+	ans = false;
+	function stop(){
+		ans = false;
+	}
+	function Game_start(){
+		ans = true;
+		start();
+	}
+	function returnTime(){
+		low = 700;
+		high = 1200;
+		ti = low + Math.floor(Math.random()*(high+1-low));
+		return ti;
+	}
+	function start(){
+		
+		clearInterval(time);
+		random();
+		ti=returnTime();
+		if(ans){
+		time = setInterval(start,ti);}
+		
+	}
+	var digits = "0123456789ABCDEF";
+	ele = document.getElementById('element');
+
+	function returnwidth(){
+		low=50;
+		high=150;
+		w=low + Math.floor(Math.random()*(high+1-low))+"px";
+		return w;
+
+	} 
+	function returnheight(){
+		low=50;
+		high=150;
+		h=low + Math.floor(Math.random()*(high+1-low))+"px";
+		return h;
+
+	}
+	function returnradius(){
+		low=0;
+		high=50;
+		r=low + Math.floor(Math.random()*(high+1-low))+"%";
+		return r;
+
+	}
+		function returntop(){
+		low=0;
+		high=400;
+		t=low + Math.floor(Math.random()*(high+1-low))+"px";
+		return t;
+
+	}
+		function returnleft(){
+		low=0;
+		high=1300;
+		l=low + Math.floor(Math.random()*(high+1-low))+"px";
+		return l;
+
+	}
+	
+    function returnRandomColor(){
+            low = 0;
+            high = 15;
+            color = '#';
+            for(i=0; i<6; i++){
+                color = color + digits[low + Math.floor(Math.random()*(high+1-low))];
+            }
+            return color;
+        }
+	function random(){
+
+		
+		w = returnwidth();
+		h = returnheight();
+		r = returnradius();
+		t = returntop();
+		l=returnleft();
+		color = returnRandomColor();
+		ele.style.backgroundColor=color;
+		ele.style.width=w;
+		ele.style.height=h;
+		ele.style.borderRadius=r;
+		ele.style.top=t;
+		ele.style.left=l;
+		var start_game = new Date();
+		start_game_time = start_game.getTime();
+		//console.log(start_game_time);
+		
+
+	}
+	function showTime(){
+		if(ans){
+		var click = new Date();
+		var click_time = click.getTime();
+		var play_time = (click_time - start_game_time);
+		//console.log(play_time);
+		text.innerHTML = play_time+"ms";
+		start();
+		}
+	}
+
+</script>
+</body>
+</html>

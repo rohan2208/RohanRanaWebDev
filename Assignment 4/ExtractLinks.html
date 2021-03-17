@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Extract Links</title>
+</head>
+<body>
+	<div align="center">
+	<a href="https://www.google.com">Google</a>
+	<a href="https://www.youtube.com/">Youtube</a>
+</div>
+<div>
+	<p></p>
+	<p></p>
+</div>
+<script type="text/javascript">
+	list=document.getElementsByTagName("A");
+	var i;
+	for(i=0;i<list.length;i++){
+		 document.getElementsByTagName("P")[i].textContent = list[i].href;
+	}
+</script>
+</body>
+</html>
